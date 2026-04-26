@@ -92,14 +92,19 @@
 %%%%%%%%%% Chapter and Section %%%%%%%%%%%%%
 \setcounter{secnumdepth}{4}
 \setlength{\parindent}{2em}
-\renewcommand{\chaptername}{\prechaptername\CJKnumber{\thechapter}\postchaptername}
-\titleformat{\chapter}{\centering\sanhao\hei}{\sanhao\hei\chaptername}{2em}{}
+\ctexset{
+  chapter = {
+    name = {},
+    number = \arabic{chapter}
+  }
+}
+\titleformat{\chapter}{\centering\sanhao\hei\bfseries}{\sanhao\hei\bfseries\thechapter}{1em}{}
 \titlespacing{\chapter}{0pt}{0.8\baselineskip}{0.5\baselineskip}
-\titleformat{\section}{\sihao\hei}{\thesection}{1em}{}
+\titleformat{\section}{\sihao\hei\bfseries}{\thesection}{1em}{}
 \titlespacing{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip}
-\titleformat{\subsection}{\xiaosi\hei}{\thesubsection}{1em}{}
+\titleformat{\subsection}{\xiaosi\hei\bfseries}{\thesubsection}{1em}{}
 \titlespacing{\subsection}{0pt}{0.5\baselineskip}{0.5\baselineskip}
-\titleformat{\subsubsection}{\xiaosi\hei}{\thesubsubsection}{1em}{}
+\titleformat{\subsubsection}{\xiaosi\hei\bfseries}{\thesubsubsection}{1em}{}
 \titlespacing{\subsubsection}{0pt}{0.5\baselineskip}{0.5\baselineskip}
 
 %%%%%%%%%% Table, Figure and Equation %%%%%%%%%%%%%%%%%
@@ -116,9 +121,9 @@
 \makeatletter
 \long\def\@makecaption#1#2{
    \vskip\abovecaptionskip
-   \sbox\@tempboxa{\centering\wuhao\song{#1\qquad #2} }
+   \sbox\@tempboxa{\centering\wuhao\song\bfseries{#1\qquad #2} }
    \ifdim \wd\@tempboxa >\hsize
-     \centering\wuhao\song{#1\qquad #2} \par
+     \centering\wuhao\song\bfseries{#1\qquad #2} \par
    \else
      \global \@minipagefalse
      \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}
@@ -184,9 +189,9 @@
 % 重定义参考文献样式，来自thu
 \makeatletter
 \renewenvironment{thebibliography}[1]{
-   \titleformat{\chapter}{\raggedright\sihao\hei}{\chaptername}{2em}{}
+   \titleformat{\chapter}{\centering\xiaoer\hei}{\thechapter}{1em}{}
    \chapter*{\bibname}
-   \wuhao\song
+   \renewcommand{\baselinestretch}{1}\wuhao\song\selectfont
    \list{\@biblabel{\@arabic\c@enumiv}}
         {\renewcommand{\makelabel}[1]{##1\hfill}
          \settowidth\labelwidth{0 cm}
@@ -208,7 +213,7 @@
     \endlist\frenchspacing}
 \makeatother
 
-\addtolength{\bibsep}{0}     % 缩小参考文献间的垂直间距
+% \addtolength{\bibsep}{0}     % 缩小参考文献间的垂直间距
 \setlength{\bibhang}{2em}         % 每个条目自第二行起缩进的距离
 
 % 参考文献引用作为上标出现
@@ -242,37 +247,38 @@
 \pagestyle{fancy}
   \fancyhf{}
   \fancyhead[C]{\song\xiaowu \@cheading}  % 页眉显示山东大学本科生毕业论文
-  \fancyfoot[C]{\xiaowu ~\thepage~}
+  \fancyfoot[C]{\xiaowu\rmfamily ~\thepage~}
 \newlength{\@title@width}
 
 % 定义封面
 \def\makecover{
 %\cleardoublepage%
    \phantomsection
-    \pdfbookmark[-1]{\@ctitle}{ctitle}
+    \pdfbookmark[-1]{\texorpdfstring{\@ctitle}{山东大学本科毕业论文（设计）}}{ctitle}
 
     \begin{titlepage}
+      \thispagestyle{empty}
       \vspace*{-7em}
       \begin{center}
 
   \begin{figure}[h]
   \centering
-  \centerline{\includegraphics[width=\textwidth]{Thesis/figures/sdulogo.jpg}}
+  \centerline{\includegraphics[width=\textwidth]{figures/sdulogo.jpg}}
   \end{figure}
   
   \vspace*{-4em}
-  \song\prefacesize{毕业论文（设计）}
+  \hei\prefacesize{毕业论文（设计）}
   \end{center}
 
   \vspace*{-2em}
   \noindent\song\sanhao{\textbf{论文（设计）题目：}}
 
   \begin{center}
-  \vspace*{3em}
-  \hei\xiaoer{\textbf{\@ctitle}}
+  \vspace*{2em}
+  \parbox{0.9\textwidth}{\centering\hei\xiaoer\bfseries\@ctitle\par}
   \vspace*{16pt}
   
-  \vspace*{4em}
+  \vspace*{2.5em}
   \renewcommand\arraystretch{1.5}
   \setlength{\@title@width}{6cm}
   {\sihao\song{\bf{
@@ -285,7 +291,7 @@
     指导教师 &  \underline{\makebox[\@title@width][c]{\@csupervisor}} \\
   \end{tabular}}}
  }
-  \vspace*{5em}
+  \vspace*{3.5em}
 
 \song\sanhao{\textbf{\@cdate}}
 \end{center}
@@ -317,7 +323,7 @@
 \vspace{\baselineskip}
 
 \hangafter=1\hangindent=60pt\noindent
-{\xiaosi\textbf{Keywords:}} {\xiaosi\@ekeywords}
+{\xiaosi\textbf{Key Words:}} {\xiaosi\@ekeywords}
 \thispagestyle{empty}
 }
 \makeatother
