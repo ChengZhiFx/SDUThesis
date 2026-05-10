@@ -1,10 +1,10 @@
-# SDUThesisLatexTemplate
+# 山东大学毕业论文（设计）LaTeX 模版
 
 Latex template for SDU thesis.
 
 # 说明
 
-山东大学本科生毕业论文 LaTeX 模版。本模板neta自天津大学模板，本README亦源于天津大学模板。
+山东大学毕业论文（设计）LaTeX 模版 2026 年版。本模板 fork 自 2020 级计科学长的 https://github.com/Sing-How/sduthesis，neta 自天津大学模板，本 README 亦源于前人。
 
 # 为何使用 LaTeX
 
